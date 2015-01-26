@@ -10,3 +10,5 @@ that parses out the parameters and runs the input through the line
 processors.
 
 Unit testing is done on the library part only.
+
+Build with Gradle.
