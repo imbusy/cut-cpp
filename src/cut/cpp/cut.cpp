@@ -16,7 +16,6 @@ int main(int argc, char *argv[]) {
    // parse all the arguments
    for(int param = 1; param < argc; param++) {
       auto arg = std::string(argv[param]);
-      std::cout<<arg<<' '<<param<<' '<<argc<<'\n';
       if(arg == "-b" && param+1 < argc) {
          bytes = true;
          list = std::string(argv[param+1]);
