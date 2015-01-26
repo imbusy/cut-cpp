@@ -28,7 +28,6 @@ int main(int argc, char *argv[]) {
       } else if(arg == "--complement") {
          complement = true;
       } else if(arg == "-d" && param+1 < argc) {
-         std::cout<<"D\n";
          delimiter = argv[param+1][0];
          param++;
       } else {
