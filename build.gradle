@@ -1,5 +1,29 @@
 apply plugin: 'cpp'
 
+libraries {
+   libcut {}
+}
+
 executables {
    cut {}
+   libcutTest {}
+}
+
+sources {
+   cut {
+      cpp {
+         lib libraries.libcut.static
+      }
+   }
+   libcutTest {
+      cpp {
+         lib libraries.libcut.static
+      }
+   }
+}
+
+binaries.all {
+   if(toolChain in Gcc) {
+      cppCompiler.args "-std=c++0x"
+   }
 }
