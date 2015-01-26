@@ -7,7 +7,7 @@
 class FailedTestException { };
 
 template <typename T, typename U>
-void test_equal(T value, U expected, std::string test) {
+void testEqual(T value, U expected, std::string test) {
    if(value == expected) {
       std::cout<<test<<": PASSED\n";
    } else {
