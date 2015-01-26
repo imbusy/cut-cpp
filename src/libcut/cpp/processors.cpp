@@ -3,9 +3,8 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
-
-#include <stdlib.h>
-#include <string.h>
+#include <climits>
+#include <cstdlib>
 
 #include "libcut.hpp"
 
@@ -33,17 +32,27 @@ Ranges getRanges(string list) {
    int rangeStart = -1, rangeEnd = -1;
    
    for(auto range : split(list, ',')) {
-      auto digits = split(range, '-');
-      if(digits.size() == 1) {
-         result.push_back(make_pair<int, int>(atoi(digits[0].c_str()), atoi(digits[0].c_str())));
-      } else if(digits.size() == 2) {
-         result.push_back(make_pair<int, int>(atoi(digits[0].c_str()), atoi(digits[1].c_str())));
-      } else {
-         // raise error
-      }
-      if(result.back().first == 0 || result.back().second == 0) {
-         // raise error
-         // some characters were non-numeric
+      if(range.size() > 0) {
+         auto digits = split(range, '-');
+         if (digits.size() == 1) {
+            // N
+            result.push_back(make_pair<int, int>(atoi(digits[0].c_str()), atoi(digits[0].c_str())));
+         } else if(digits.size() == 2 && digits[0] == "") {
+            // -M
+            result.push_back(make_pair<int, int>(1, atoi(digits[1].c_str())));
+         } else if (digits.size() == 2 && digits[1] == "") {
+            // N-
+            result.push_back(make_pair<int, int>(atoi(digits[0].c_str()), INT_MAX));
+         } else if(digits.size() == 2) {
+            // N-M
+            result.push_back(make_pair<int, int>(atoi(digits[0].c_str()), atoi(digits[1].c_str())));
+         } else {
+            // raise error
+         }
+         if(result.back().first == 0 || result.back().second == 0) {
+            // raise error
+            // some characters were non-numeric
+         }
       }
    }
    return result;

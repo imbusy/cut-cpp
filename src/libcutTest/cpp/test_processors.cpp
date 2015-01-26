@@ -10,6 +10,8 @@ int main(int, char* []) {
       test_true(cut::bytes("Hello, World", "2"), "e", "single byte");
       test_true(cut::bytes("Hello, World", "2,5"), "eo", "list of bytes");
       test_true(cut::bytes("Hello, World", "5,2"), "eo", "list of bytes reversed");
+      test_true(cut::bytes("Hello, World", "-3"), "Hel", "list of bytes from start");
+      test_true(cut::bytes("Hello, World", "3-"), "llo, World", "list of bytes to end");
       test_true(cut::bytes("Hello, World", "3-5"), "llo", "single range of bytes");
       test_true(cut::bytes("Hello, World", "3-5,4-6"), "llo,", "two ranges of bytes");
       test_true(cut::bytes("Hello, World", "2", true), "Hllo, World", "single byte complement");
