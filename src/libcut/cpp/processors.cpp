@@ -29,7 +29,6 @@ typedef vector<pair<int, int>> Ranges;
 // get a list of ranges to go through
 Ranges getRanges(string list) {
    Ranges result;
-   int rangeStart = -1, rangeEnd = -1;
    
    for(auto range : split(list, ',')) {
       if(range.size() > 0) {
