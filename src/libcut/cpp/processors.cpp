@@ -11,7 +11,7 @@
 using namespace std;
 
 // split a string into multiple strings using a delimiter character
-vector<string> split(string input, char delim) {
+vector<string> split(const string &input, char delim) {
    vector<string> result;
    int start = 0;
    int end = input.find(delim, start);
@@ -27,7 +27,7 @@ vector<string> split(string input, char delim) {
 typedef vector<pair<int, int>> Ranges;
 
 // get a list of ranges to go through
-Ranges getRanges(string list) {
+Ranges getRanges(const string &list) {
    Ranges result;
    
    for(auto range : split(list, ',')) {
@@ -58,7 +58,7 @@ Ranges getRanges(string list) {
 }
 
 // create the mask to use when selecting characters/fields
-unique_ptr<bool []> getMask(string list, int size) {
+unique_ptr<bool []> getMask(const string &list, int size) {
    auto mask = unique_ptr<bool []>(new bool[size]);
    fill(mask.get(), mask.get()+size, false);
    
@@ -72,7 +72,7 @@ unique_ptr<bool []> getMask(string list, int size) {
    return mask;
 }
 
-string cut::bytes(string line, string list, bool complement) {
+string cut::bytes(const string &line, const string &list, bool complement) {
    auto mask = getMask(list, line.size());
    string result = "";
    
@@ -86,7 +86,7 @@ string cut::bytes(string line, string list, bool complement) {
    return result;
 }
 
-string cut::fields(string line, string list, char delimiter, bool complement) {
+string cut::fields(const string &line, const string &list, char delimiter, bool complement) {
    auto fields = split(line, delimiter);
    auto mask = getMask(list, fields.size());
    string result = "";
